@@ -32,10 +32,6 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-Assets/SandboxJoey/j_Scripts.meta
-Assets/SandboxJoey/j_Scripts.meta
-Assets/SandboxJoey/j_Scripts/Camera.meta
-Assets/SandboxJoey/j_Scripts.meta
-Assets/Scenes/Levels.meta
-Assets/SandboxIsaac.meta
-Assets/SandboxIsaac.meta
+
+.DS_Store
+*/.DS_Store
