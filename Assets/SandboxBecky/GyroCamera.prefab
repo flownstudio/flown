@@ -9,20 +9,19 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1448747548151114}
+  m_RootGameObject: {fileID: 1574554737539388}
   m_IsPrefabParent: 1
---- !u!1 &1448747548151114
+--- !u!1 &1574554737539388
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4653970330621954}
-  - component: {fileID: 20199212506737462}
-  - component: {fileID: 124486357519085412}
-  - component: {fileID: 81353457083928818}
-  - component: {fileID: 114981431081831588}
+  - component: {fileID: 4661018077418078}
+  - component: {fileID: 20721042602901364}
+  - component: {fileID: 124144664864197748}
+  - component: {fileID: 81753997744570654}
   m_Layer: 0
   m_Name: GyroCamera
   m_TagString: Untagged
@@ -30,25 +29,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4653970330621954
+--- !u!4 &4661018077418078
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448747548151114}
+  m_GameObject: {fileID: 1574554737539388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.49, y: 0.24, z: 0}
+  m_LocalPosition: {x: 6.8997126, y: 3.4825149, z: 2.7303123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &20199212506737462
+--- !u!20 &20721042602901364
 Camera:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448747548151114}
+  m_GameObject: {fileID: 1574554737539388}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -78,30 +77,17 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &81353457083928818
+--- !u!81 &81753997744570654
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448747548151114}
+  m_GameObject: {fileID: 1574554737539388}
   m_Enabled: 1
---- !u!114 &114981431081831588
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448747548151114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c29b6dca138fd44b9b5f4c2c6b0b0bf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1548444469480656, guid: 0d15e267911e14f4c87543195dbeeabf, type: 2}
-  speed: 0
---- !u!124 &124486357519085412
+--- !u!124 &124144664864197748
 Behaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1448747548151114}
+  m_GameObject: {fileID: 1574554737539388}
   m_Enabled: 1
