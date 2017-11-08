@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouseControl : MonoBehaviour {
 	//Public variables
 	public GameObject target;//This is the invisible target point on the path or whatever
+	public GameObject birdPlayer;
 
 	private float speed = 1.0F;
 	private GameObject cameraContainer;
@@ -34,6 +35,10 @@ public class MouseControl : MonoBehaviour {
 		//compare the angle/distance between mouse and point on path.
 		CompareAngle ();
 
+
+
+
+
 		//Beginning of the Feedback
 		//Using compareAngle we can play around with a bunch of things, link it to Audio etc. see below functions
 		//
@@ -46,6 +51,12 @@ public class MouseControl : MonoBehaviour {
 		} else {
 			speed -= 0.05F;
 		}
+
+
+
+
+
+
 			
 		//Transform camera toward target unless we are at primeDistance behind point.
 		if (distance >= primeDistance) {
