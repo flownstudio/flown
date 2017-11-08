@@ -25,6 +25,11 @@ public class MouseControl : MonoBehaviour {
 	}
 		
 	private void Update(){
+
+		//MEGAN
+		//in update play around with directional control instead
+		// maybe also taking speed/gravity/aceleration/deccelration into account
+
 		float primeDistance = 5;// ideal distance to be flying behind the point
 
 		//Calculate the distance between the camera and the point the sphere/bird needs to follow
@@ -32,7 +37,6 @@ public class MouseControl : MonoBehaviour {
 
 		float step = speed * Time.deltaTime;
 
-	
 
 		Debug.Log("DISTANCE: " + distance);
 
@@ -70,6 +74,14 @@ public class MouseControl : MonoBehaviour {
 	}
 
 	private void CompareAngle(){
+
+		//BECKY
+		//Give directional look angle too...
+		// create direction too 
+
+
+
+
 		Vector3 worldPoint,relativePos;
 		Camera cam = GetComponent<Camera>();
 		Ray ray;// mouse Vector3 ray into real space 

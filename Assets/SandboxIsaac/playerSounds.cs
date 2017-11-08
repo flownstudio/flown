@@ -24,7 +24,19 @@ public class playerSounds : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {		
-		distanceFromFlock = this.GetComponent<MouseControlTwo>().getCamMouseAngleDiff();
+		float[] feedbackArray = this.GetComponent<MouseControlTwo>().getCamMouseAngleDiff();
+		distanceFromFlock = feedbackArray[1];
+
+		// Creating sounds for a range
+		//IF too close sound
+		//IF too far sound
+		//DO the sliding scale/fading between sounds.
+
+		//ANOTHER SCRIPT
+		//DO the same idea/scale for post-processing image.
+		//Can we put arrows?? 
+		//SHADER on camera etc
+
 
 		if(distanceFromFlock < dangerDistance){
 			volumeLevel = 0.0f;
