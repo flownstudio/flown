@@ -7,7 +7,8 @@ public class player : MonoBehaviour {
 
 	public float distanceFromFlock;
 	public float distanceFromGround;
-	public float volumeLevel = 0.0f;
+	public float dangerDistance;
+	private float volumeLevel = 0.0f;
 	// public double frequency = 440;
 	// public double gain = 0.05;
 
@@ -37,11 +38,11 @@ public class player : MonoBehaviour {
 		Vector3 groundPoint = new Vector3(this.transform.position.x, 0, this.transform.position.z);
 		distanceFromGround = Vector3.Distance(this.transform.position, groundPoint);
 
-		if(distanceFromFlock < 6){
+		if(distanceFromFlock < dangerDistance){
 			volumeLevel = 0.0f;
 		}
 		else{
-			volumeLevel = distanceFromFlock * 0.01f;
+			volumeLevel = (distanceFromFlock - dangerDistance) * 0.02f;
 		}
 		
 		audioSource.volume = volumeLevel;

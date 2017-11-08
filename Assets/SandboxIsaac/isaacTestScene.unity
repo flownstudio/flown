@@ -363,7 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFromFlock: 0
   distanceFromGround: 0
-  volumeLevel: 0
+  dangerDistance: 6
 --- !u!1 &931818675
 GameObject:
   m_ObjectHideFlags: 0
