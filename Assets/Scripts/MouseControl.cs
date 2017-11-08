@@ -10,11 +10,12 @@ public class MouseControl : MonoBehaviour {
 	private float speed = 1.0F;
 	private GameObject cameraContainer;
 	private Quaternion rot;
-	private float compareAngle; 
+	private float compareAngle, distance;
 
 	// Use this for initialization
 	void Start () {
 		cameraContainer = new GameObject ("Camera Container");
+		Cursor.visible = false;
 
 		//transforms cameraContainer to camera position
 		cameraContainer.transform.position = transform.position;
@@ -24,44 +25,47 @@ public class MouseControl : MonoBehaviour {
 	}
 		
 	private void Update(){
-		float step = speed * Time.deltaTime;
-		float primeDistance = 10;// ideal distance to be flying behind the point
+		float primeDistance = 5;// ideal distance to be flying behind the point
 
 		//Calculate the distance between the camera and the point the sphere/bird needs to follow
-		float distance = Vector3.Distance (target.transform.position, transform.position);
+		distance = Vector3.Distance (target.transform.position, transform.position);
 
-		Debug.Log(distance);
+		float step = speed * Time.deltaTime;
+
+	
+
+		Debug.Log("DISTANCE: " + distance);
+
 
 		//compare the angle/distance between mouse and point on path.
 		CompareAngle ();
 
-
-
-
+		Vector3 transformTarget = target.transform.position;
 
 		//Beginning of the Feedback
 		//Using compareAngle we can play around with a bunch of things, link it to Audio etc. see below functions
 		//
 		//Need way more sophisticated forces/speeds/accelerating etc.
 		//Maybe way to link the point on path ??
-		if (compareAngle <= 4 && distance >= primeDistance) {
-			speed += 0.1F;
-		} else if (compareAngle > 4) {
-			speed -= 0.3F;
-		} else {
-			speed -= 0.05F;
-		}
+		if (compareAngle <= 5.0) {
+			if (distance > primeDistance) {
+				speed += (float) 0.01*(distance-primeDistance);
+			} else {
+				speed -= 0.001F;
+			}
+		} else if (compareAngle > 5.0) {
+			speed -= 1.0F;
+		} 
 
+		//The problem is that the speed needs to be set by the speed of the bird.
+		//get to the point in the transform and then start to deccelerate.
 
-
-
-
-
+		Debug.Log("SPEED: " + speed);
 			
 		//Transform camera toward target unless we are at primeDistance behind point.
 		if (distance >= primeDistance) {
-			transform.position = Vector3.MoveTowards (transform.position, target.transform.position, step);
-			//transform.position = Vector3.Lerp(transform.position, target.transform.position, step);// LErp seems to be weird tes with real point
+			transform.position = Vector3.MoveTowards (transform.position, transformTarget, step);
+		//transform.position = Vector3.Lerp(transform.position, target.transform.position, step);// LErp seems to be weird tes with real point
 		}
 	}
 
@@ -79,7 +83,7 @@ public class MouseControl : MonoBehaviour {
 		relativePos = target.transform.position - transform.position;
 
 		//get direction of point on path in relation to camera offset by mouse ray direction/point
-		worldPoint = (target.transform.position + ray.direction) - transform.position;
+		worldPoint = (target.transform.position + (ray.direction*3)) - transform.position;
 
 		//get the two orientation/directions
 		directLook = Quaternion.LookRotation(relativePos);
@@ -89,14 +93,23 @@ public class MouseControl : MonoBehaviour {
 		transform.localRotation = mouseLook;
 
 		//Compare the Quaternions by getting their angle between two
-		compareAngle = Quaternion.Angle(mouseLook, directLook);
+		compareAngle = Quaternion.Angle (mouseLook, directLook);
 
-//		Debug.Log(compareAngle);
+//		Debug.Log("ANGLE: " + compareAngle);
+//		Debug.Log("relativePos: " + relativePos);
 	}
 
 	//Figure out if this is callable/storable in other scripts.
-	public float getCamMouseAngleDiff(){
-		return compareAngle;
+	public float[] getCamMouseAngleDiff(){
+		float[] vals = new float[2];
+		vals [0] = compareAngle;
+		vals [1] = distance;
+		return vals;
+	}
+
+	void OnGUI() {
+		string gui = "ANGLE: " + compareAngle;
+		GUI.Label(new Rect(10, 10, 500, 20), gui );
 	}
 
 }

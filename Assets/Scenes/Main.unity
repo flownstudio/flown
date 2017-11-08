@@ -307,6 +307,11 @@ Prefab:
       propertyPath: Radius.y
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 23847169923277202, guid: d7b903565b4046e459bf39f0cd7484c9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7b903565b4046e459bf39f0cd7484c9, type: 2}
   m_IsPrefabParent: 0
