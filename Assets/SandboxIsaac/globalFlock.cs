@@ -8,7 +8,7 @@ public class globalFlock : MonoBehaviour {
 	public GameObject birdObject;
 	public GameObject goalPrefab;
 	public static int sceneSize = 100;
-	static int numOfBirds = 150;
+	static int numOfBirds = 100;
 	public static GameObject[] allBirds = new GameObject[numOfBirds];
 	public static Vector3 headingPos = Vector3.zero;
 	public bool switchDirectionX = false;

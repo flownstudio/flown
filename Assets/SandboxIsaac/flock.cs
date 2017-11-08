@@ -15,9 +15,34 @@ public class flock : MonoBehaviour {
 	//turn back at end of boundary
 	bool turning = false;
 
+	private string filename;
 	// Use this for initialization
 	void Start () {
 		speed = Random.Range(0.5f,2);
+
+		AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+
+		int filenumber = Random.Range(1,4);
+		switch(filenumber){
+			case 1:
+				filename = "isaacsTestResources/one";
+				break;
+			case 2:
+				filename = "isaacsTestResources/two";
+				break;
+			case 3:
+				filename = "isaacsTestResources/three";
+				break;
+			case 4:
+				filename = "isaacsTestResources/four";
+				break;
+		}
+ 		audioSource.clip = Resources.Load(filename) as AudioClip;
+ 		audioSource.loop = true;
+ 		audioSource.volume = 0.05f;
+ 		audioSource.spatialBlend = 1.0f;
+
+ 		audioSource.PlayDelayed(Random.Range(0.0f,1));
 	}
 	
 	// Update is called once per frame
