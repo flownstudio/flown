@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Other/emptyScene.unity
     guid: 2d7eca7d282d94f0f8f9c5b50b92c900
-  - enabled: 1
+  - enabled: 0
     path: Assets/SandboxBecky/iOSGyroBuild.unity
     guid: d45d4d520f20342e2be1af9d425a0897
+  - enabled: 0
+    path: Assets/SandboxBecky/desktopBuild.unity
+    guid: 18f6f0c9af68e4f1389858b6e4e28bb0
+  - enabled: 1
+    path: Assets/SandboxBecky/mainBecky.unity
+    guid: 2c434e7b847cc451285cf82253feeb4e
