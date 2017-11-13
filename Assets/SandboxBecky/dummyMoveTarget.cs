@@ -31,6 +31,8 @@ public class dummyMoveTarget : MonoBehaviour {
 		}
 		transform.position = Vector3.Lerp(startMarker, marker.transform.position, fracJourney);
 
+
+
 	}
 
 	void pickRandomPoint() {

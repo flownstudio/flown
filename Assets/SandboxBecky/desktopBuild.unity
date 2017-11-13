@@ -177,6 +177,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &641877915 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1601663036622184, guid: a80433203daea47b3a02973acd3d396e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1849325128}
+--- !u!114 &641877916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 641877915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044e58f0b97254ee69637f20448bc50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1511321131}
+  birdPlayer: {fileID: 0}
 --- !u!1001 &1262749046
 Prefab:
   m_ObjectHideFlags: 0
@@ -230,7 +248,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1511321131}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96f0a9f73c4994a389ad54a298104fe1, type: 3}
   m_Name: 
@@ -281,7 +299,8 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1511321131}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114228960385948146, guid: a80433203daea47b3a02973acd3d396e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a80433203daea47b3a02973acd3d396e, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1999468852

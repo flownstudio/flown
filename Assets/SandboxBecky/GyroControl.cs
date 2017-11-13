@@ -34,8 +34,8 @@ public class GyroControl : MonoBehaviour {
 			gyro = Input.gyro;
 			gyro.enabled = true;
 
-//			cameraContainer.transform.rotation = Quaternion.Euler (90f, 90f, 0f);
-//			rot = new Quaternion (0, 0, 1, 0);
+			cameraContainer.transform.rotation = Quaternion.Euler (90f, 90f, 0f);
+			rot = new Quaternion (0, 0, 1, 0);
 
 			return true;
 		}
@@ -53,7 +53,7 @@ public class GyroControl : MonoBehaviour {
 			//		//Don't transform
 //					transform.localRotation = rotation;
 
-			transform.localRotation = gyro.attitude ;
+			transform.localRotation = gyro.attitude * rot;
 
 			Debug.Log ("localRotation: " + transform.localRotation);
 			Debug.Log ("Rotation: " + transform.rotation);
@@ -71,7 +71,6 @@ public class GyroControl : MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
 
 
-//			eulerVals = "X: " + transform.localEulerAngles.x + "\n Y: " + transform.localEulerAngles.y + "\n Z: " + transform.localEulerAngles.z;
 			eulerVals = "ANGLE: " + compareAngle;
 
 		}
