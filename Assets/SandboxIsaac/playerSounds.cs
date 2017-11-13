@@ -24,7 +24,7 @@ public class playerSounds : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {		
-		float[] feedbackArray = this.GetComponent<MouseControlTwo>().getCamMouseAngleDiff();
+		float[] feedbackArray = this.GetComponent<MouseControlMegan>().getCamMouseAngleDiff();
 		distanceFromFlock = feedbackArray[1];
 
 		// Creating sounds for a range
