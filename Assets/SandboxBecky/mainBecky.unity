@@ -198,9 +198,28 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1338202997}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114228960385948146, guid: a80433203daea47b3a02973acd3d396e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a80433203daea47b3a02973acd3d396e, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &524779375 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1601663036622184, guid: a80433203daea47b3a02973acd3d396e,
+    type: 2}
+  m_PrefabInternal: {fileID: 318601368}
+--- !u!114 &524779376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 524779375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044e58f0b97254ee69637f20448bc50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1338202997}
+  birdPlayer: {fileID: 0}
 --- !u!1 &1089425205
 GameObject:
   m_ObjectHideFlags: 0
