@@ -43,7 +43,7 @@ public class playerSounds : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {		
-		float[] feedbackArray = this.GetComponent<MouseControlTwo>().getCamMouseAngleDiff();
+		float[] feedbackArray = this.GetComponent<MouseControlMegan>().getCamMouseAngleDiff();
 		distanceFromFlock = feedbackArray[1];
 		//ANOTHER SCRIPT
 		//DO the same idea/scale for post-processing image.

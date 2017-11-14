@@ -11,6 +11,7 @@ public class MouseControlMegan : MonoBehaviour {
 	private GameObject cameraContainer;
 	private Quaternion rot;
 	private float compareAngle, distance;
+	private float birdSpeed = 90.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -26,51 +27,9 @@ public class MouseControlMegan : MonoBehaviour {
 
 	private void Update(){
 
-		//MEGAN
-		//in update play around with directional control instead
-		// maybe also taking speed/gravity/aceleration/deccelration into account
+		transform.position += transform.forward * Time.deltaTime * birdSpeed;
+		transform.Rotate (Input.GetAxis ("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));
 
-		float primeDistance = 5;// ideal distance to be flying behind the point
-
-		//Calculate the distance between the camera and the point the sphere/bird needs to follow
-		distance = Vector3.Distance (target.transform.position, transform.position);
-
-		float step = speed * Time.deltaTime;
-
-
-		Debug.Log("DISTANCE: " + distance);
-
-
-		//compare the angle/distance between mouse and point on path.
-		CompareAngle ();
-
-		Vector3 transformTarget = target.transform.position;
-
-		//Beginning of the Feedback
-		//Using compareAngle we can play around with a bunch of things, link it to Audio etc. see below functions
-		//
-		//Need way more sophisticated forces/speeds/accelerating etc.
-		//Maybe way to link the point on path ??
-		if (compareAngle <= 5.0) {
-			if (distance > primeDistance) {
-				speed += (float) 0.01*(distance-primeDistance);
-			} else {
-				speed -= 0.001F;
-			}
-		} else if (compareAngle > 5.0) {
-			speed -= 1.0F;
-		} 
-
-		//The problem is that the speed needs to be set by the speed of the bird.
-		//get to the point in the transform and then start to deccelerate.
-
-		Debug.Log("SPEED: " + speed);
-
-		//Transform camera toward target unless we are at primeDistance behind point.
-		if (distance >= primeDistance) {
-			transform.position = Vector3.MoveTowards (transform.position, transformTarget, step);
-			//transform.position = Vector3.Lerp(transform.position, target.transform.position, step);// LErp seems to be weird tes with real point
-		}
 	}
 
 	private void CompareAngle(){
@@ -78,8 +37,6 @@ public class MouseControlMegan : MonoBehaviour {
 		//BECKY
 		//Give directional look angle too...
 		// create direction too 
-
-
 
 
 		Vector3 worldPoint,relativePos;
