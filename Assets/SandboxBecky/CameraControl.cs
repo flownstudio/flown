@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour {
 	//Public variables
 	public GameObject target;//This is the invisible target point on the path or whatever
-	public GameObject birdPlayer;
+	public Camera attachedCamera;// Model that we are putting in front of camera
 
 	private float speed = 1.0F;
-	private GameObject cameraContainer;
+//	private GameObject cameraContainer;
 	private Quaternion rot;
 	private float compareAngle, distance;
 
@@ -17,13 +17,13 @@ public class CameraControl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cameraContainer = new GameObject ("Camera Container");
+//		cameraContainer = new GameObject ("Camera Container");
 		Cursor.visible = false;
 
 		//transforms cameraContainer to camera position
-		cameraContainer.transform.position = transform.position;
+//		cameraContainer.transform.position = transform.position;
 		//Sets cameraConainer as parent of camera
-		transform.SetParent (cameraContainer.transform);
+//		transform.SetParent (cameraContainer.transform);
 
 		gyroEnabled = EnableGyro();
 	}
@@ -97,13 +97,14 @@ public class CameraControl : MonoBehaviour {
 
 		//BECKY
 		//Give directional look angle too...
-		// create direction too 
-
+		//create direction too 
+		// 
 
 
 
 		Vector3 worldPoint,relativePos;
-		Camera cam = GetComponent<Camera>();
+//		Camera cam = GetComponent<Camera>();
+//		Camera cam = transform.GetChild(1);
 		Ray ray;// mouse Vector3 ray into real space 
 		Quaternion directLook, playerLook;
 
@@ -131,7 +132,7 @@ public class CameraControl : MonoBehaviour {
 
 		} else {
 			//get ray of mouse to calculate real point in space
-			ray = cam.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+			ray = attachedCamera.ScreenPointToRay(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 			Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);// draw ray for now
 
 			//get direction of point on path in relation to camera offset by mouse ray direction/point
@@ -145,6 +146,8 @@ public class CameraControl : MonoBehaviour {
 
 		//Compare the Quaternions by getting their angle between two
 		compareAngle = Quaternion.Angle (playerLook, directLook);
+
+		//How to compare the
 
 		//		Debug.Log("ANGLE: " + compareAngle);
 		//		Debug.Log("relativePos: " + relativePos);
