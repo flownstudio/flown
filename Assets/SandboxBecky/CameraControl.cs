@@ -48,6 +48,14 @@ public class CameraControl : MonoBehaviour {
 		//in update play around with directional control instead
 		// maybe also taking speed/gravity/aceleration/deccelration into account
 
+		// tap or space bar flaps the birds wings.
+		// three taps max 
+		// directional up and down for moving up or down using mouse and gyro
+		// do the camera adjust positon
+		// the bird axis rotates
+		// the widening of camera angle
+
+
 		float primeDistance = 5;// ideal distance to be flying behind the point
 
 		//Calculate the distance between the camera and the point the sphere/bird needs to follow
