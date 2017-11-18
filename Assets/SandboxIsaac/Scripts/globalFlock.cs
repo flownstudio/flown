@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class globalFlock : MonoBehaviour {
 
-
+	public GameObject player;
 	public GameObject birdObject;
 	public GameObject goalPrefab;
 	public static int sceneSize = 100;
@@ -12,7 +12,7 @@ public class globalFlock : MonoBehaviour {
 	public int playerSuccess = 1;
 	Vector3 playerPosition;
 
-	public static int numOfBirds = 200;
+	public static int numOfBirds = 300;
 	public static GameObject[] allBirds = new GameObject[numOfBirds];
 	public static Vector3 headingPos = Vector3.zero;
 
@@ -21,9 +21,9 @@ public class globalFlock : MonoBehaviour {
 	public bool switchDirectionZ = false;
 	public float zPos = 0;
 	public float xPos = 0;
-	public float yPos = 6;
+	public float yPos = 12;
 
-	public float headingMaxDistanceFromPlayer = 16;
+	public float headingMaxDistanceFromPlayer = 80;
 	public bool waitingForPlayer = false;
 
 	// Use this for initialization
@@ -43,35 +43,35 @@ public class globalFlock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// update visibilit of birds in flock based upon player score.
-		playerSuccess = GameObject.Find("player").GetComponent<playerScriptIsaac>().successRating;
+		playerSuccess = player.GetComponent<playerScriptIsaac>().successRating;
 		birdVisibility();
 
 		// how far away from, the heading is the player
-		playerPosition = GameObject.Find("player").transform.position;
+		playerPosition = player.transform.position;
 		float distanceFromPlayer = Vector3.Distance(playerPosition, headingPos);
 		// If the player is close enough to the heading point of the flock then update
 		// the heading. Otherwise stay still till player catches up.
 		if(UnityEngine.Random.Range(0,20) < 1){
 			if(waitingForPlayer){
-				if(distanceFromPlayer < 2){
+				if(distanceFromPlayer < 16){
 					waitingForPlayer = false;
 				}
 			}else{
 				if(distanceFromPlayer < headingMaxDistanceFromPlayer){
 					headingPos = new Vector3(xPos, yPos, zPos);
 					goalPrefab.transform.position = headingPos;
-					xPos += Random.Range(-0.1f,0.1f);
-					yPos += Random.Range(-0.1f,0.1f);
+					xPos += Random.Range(-1f,1f);
+					yPos += Random.Range(-1f,1f);
 
 					//keep above ground
-					if(yPos <= 3){
-						yPos += Random.Range(0.2f,0.4f);
+					if(yPos <= 11){
+						yPos += Random.Range(1f,4f);
 					}
 
 					// if(zPos >= sceneSize ||  zPos <= -sceneSize){
 					// 	switchDirectionZ = !switchDirectionZ;
 					// }
-					zPos += 1f;
+					zPos += 5f;
 				}else{
 					waitingForPlayer = true;
 				}
@@ -95,7 +95,7 @@ public class globalFlock : MonoBehaviour {
 				gos[i].transform.position = new Vector3(
 						UnityEngine.Random.Range(playerPosition.x-1, playerPosition.x),
 						UnityEngine.Random.Range(playerPosition.y-1, playerPosition.y),
-						UnityEngine.Random.Range(playerPosition.z-2, playerPosition.z-1));
+						UnityEngine.Random.Range(playerPosition.z-29, playerPosition.z-20));
 				gos[i].SetActive(true);
 				// TODO : fade in bird 
 			}

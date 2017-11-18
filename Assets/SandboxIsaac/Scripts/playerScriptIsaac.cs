@@ -8,8 +8,8 @@ public class playerScriptIsaac : MonoBehaviour {
 
 	public int successRating = 10;
 
-	public float speed = 1.3f;
-	float rotationSpeed = 6.0f;
+	public float speed = 12f;
+	float rotationSpeed = 1.0f;
 
 	public float distanceFromFlock;
 	public float distanceFromGround;
@@ -34,13 +34,13 @@ public class playerScriptIsaac : MonoBehaviour {
 		// 1% chance this frame adds a bird up to max birds then goes back down
 		if(UnityEngine.Random.Range(0,100) < 1){
 			if(scoreDirectionUp){
-				successRating += 2;
+				successRating += 1;
 				if(successRating == maxNumOfBirds){
 					scoreDirectionUp = false;
 				}
 			}
 			else{
-				successRating -= 2;
+				successRating -= 1;
 				if(successRating == 0){
 					scoreDirectionUp = true;
 				}
@@ -52,7 +52,7 @@ public class playerScriptIsaac : MonoBehaviour {
 		distanceFromGround = Vector3.Distance(this.transform.position, groundPoint);
 
 		//move forward
-		transform.Translate(0,0, Time.deltaTime * speed);
+		//transform.Translate(0,0, Time.deltaTime * speed);
 
 	}
 

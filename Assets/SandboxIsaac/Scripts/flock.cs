@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class flock : MonoBehaviour {
 
-	public float speed = 2f;
+		public float speed = 10f;
 	//how fast turn
 	float rotationSpeed = 5.0f;
 	Vector3 averageHeading;
 	Vector3 averagePostion;
-	float neighbourDistance = 4.0f;
+	float neighbourDistance = 20.0f;
 	float playerDistance;
 	float headingDistance;
 	float playerDistanceFromFlock;
-	// how far the birds will follow the player before turning back
-	public float maxPlayerDistanceFromFlock = 30;
+	// how far the birds will follow the player before turning back this should be in game manager or global flock script
+	public float maxPlayerDistanceFromFlock = 60;
 	//turn back at end of boundary
 	bool turning = false;
 	private string filename;
 	// Use this for initialization
 	void Start () {
-		speed = Random.Range(0.5f,2);
+		speed = Random.Range(2f,10);
 
 		AudioSource audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -81,16 +81,16 @@ public class flock : MonoBehaviour {
 		//away from neighbours
 		Vector3 vavoid = Vector3.zero;
 		//group speed
-		float gSpeed = 0.1f;
+		float gSpeed = 1f;
 
 		Vector3 headingPos = globalFlock.headingPos;
 
-		playerDistance = Vector3.Distance(GameObject.Find("player").transform.position, this.transform.position);
+		playerDistance = Vector3.Distance(GameObject.Find("rotated_starling").transform.position, this.transform.position);
 		headingDistance = Vector3.Distance(globalFlock.headingPos, this.transform.position);
-		playerDistanceFromFlock = GameObject.Find("player").GetComponent<playerScriptIsaac>().distanceFromFlock;
+		playerDistanceFromFlock = GameObject.Find("rotated_starling").GetComponent<playerScriptIsaac>().distanceFromFlock;
 		// if the player is too far from the heading leave the player
 		if(playerDistanceFromFlock < maxPlayerDistanceFromFlock){
-			headingPos = GameObject.Find("player").transform.position;
+			headingPos = GameObject.Find("rotated_starling").transform.position;
 		}
 
 		float dist;
@@ -109,7 +109,7 @@ public class flock : MonoBehaviour {
 					vcenter += go.transform.position;
 					groupSize++;
 					//if we are about to collide, too close, we take avoid pos
-					if(dist < 1.0f)
+					if(dist < 10.0f)
 					{
 						vavoid = vavoid + (this.transform.position - go.transform.position);
 					}
@@ -131,7 +131,7 @@ public class flock : MonoBehaviour {
 			vcenter = vcenter/groupSize + (headingPos - this.transform.position);
 			speed = gSpeed/groupSize;
 			//head in direction we need to turn
-			Vector3 direction = (vcenter + vavoid) - transform.position;
+			Vector3 direction = (vcenter + vavoid*2) - transform.position;
 			if(direction != Vector3.zero)
 			{
 				//Slerp slowly turns us in the direction we are going
