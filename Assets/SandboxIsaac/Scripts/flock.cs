@@ -106,7 +106,7 @@ public class flock : MonoBehaviour {
 					vcenter += go.transform.position;
 					groupSize++;
 					//if we are about to collide, too close, we take avoid pos
-					if(dist < 1f)
+					if(dist < 1.0f)
 					{
 						vavoid = vavoid + (this.transform.position - go.transform.position);
 					}

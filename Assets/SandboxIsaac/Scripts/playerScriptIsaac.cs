@@ -6,9 +6,9 @@ using UnityEngine;
 public class playerScriptIsaac : MonoBehaviour {
 
 
-	public int successRating = 1;
+	public int successRating = 10;
 
-	public float speed = 2.0f;
+	public float speed = 3.4f;
 	float rotationSpeed = 4.0f;
 
 	public float distanceFromFlock;
@@ -19,14 +19,17 @@ public class playerScriptIsaac : MonoBehaviour {
 	AudioSource audioSource;
 	Vector3 averageHeading;
 	Vector3 averagePosition;
-	float neighbourDistance;
+	float neighbourDistance = 0.4f;
 
 	bool turning = false;
+	bool scoreDirectionUp = true;
+	int maxNumOfBirds;
 
 	// Use this for initialization
 	void Start () {
 		
-		speed = UnityEngine.Random.Range(0.8f,2);
+		// TODO: get this from game manager or from flock script.
+		maxNumOfBirds = 200;
 
 		audioSource = gameObject.AddComponent<AudioSource>();
 
@@ -42,9 +45,22 @@ public class playerScriptIsaac : MonoBehaviour {
 
 	void Update () {	
 
-		
+		// This is just to test the visibility of other birds adding them in
+		// one at a time.
+		// 1% chance this frame adds a bird up to max birds then goes back down
 		if(UnityEngine.Random.Range(0,100) < 1){
-			successRating += 1;
+			if(scoreDirectionUp){
+				successRating += 2;
+				if(successRating == maxNumOfBirds){
+					scoreDirectionUp = false;
+				}
+			}
+			else{
+				successRating -= 2;
+				if(successRating == 0){
+					scoreDirectionUp = true;
+				}
+			}
 		}
 
 		//UPDATE AUDIO
@@ -157,5 +173,16 @@ public class playerScriptIsaac : MonoBehaviour {
 
 	}
 
+	public float[] playerInfo(){
+		float[] vals = new float[7];
+		vals [0] = successRating;
+		vals [1] = speed;
+		vals [2] = rotationSpeed;
+		vals [3] = distanceFromFlock;
+		vals [4] = distanceFromGround;
+		vals [5] = dangerDistance;
+		vals [6] = volumeLevel;
+		return vals;
+	}
 
 }
