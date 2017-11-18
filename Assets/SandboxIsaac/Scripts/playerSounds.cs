@@ -43,13 +43,8 @@ public class playerSounds : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {		
-		float[] feedbackArray = this.GetComponent<MouseControlMegan>().getCamMouseAngleDiff();
-		distanceFromFlock = feedbackArray[1];
-		//ANOTHER SCRIPT
-		//DO the same idea/scale for post-processing image.
-		//Can we put arrows?? 
-		//SHADER on camera etc
-
+		float distanceFromFlock = this.GetComponent<playerScriptIsaac>().distanceFromFlock;
+	
 		if(distanceFromFlock < tooCloseDistance){
 			tooCloseVolumeLevel = tooCloseDistance - distanceFromFlock; //increases
 			justRightVolumeLevel = distanceFromFlock * 0.2f; //decreases

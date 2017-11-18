@@ -1,53 +1,69 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class flock : MonoBehaviour {
+public class playerScriptIsaac : MonoBehaviour {
 
-	public float speed = 2f;
-	//how fast turn
+
+	public int successRating = 1;
+
+	public float speed = 2.0f;
 	float rotationSpeed = 4.0f;
 
-	Vector3 averageHeading;
-	Vector3 averagePostion;
-	float neighbourDistance = 4.0f;
+	public float distanceFromFlock;
+	public float distanceFromGround;
 
-	//turn back at end of boundary
+	public float dangerDistance = 12f;
+	private float volumeLevel = 0.0f;
+	AudioSource audioSource;
+	Vector3 averageHeading;
+	Vector3 averagePosition;
+	float neighbourDistance;
+
 	bool turning = false;
 
-	private string filename;
 	// Use this for initialization
 	void Start () {
-		speed = Random.Range(0.5f,2);
+		
+		speed = UnityEngine.Random.Range(0.8f,2);
 
-		AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+		audioSource = gameObject.AddComponent<AudioSource>();
 
-		int filenumber = Random.Range(1,4);
-		switch(filenumber){
-			case 1:
-				filename = "isaacsTestResources/one";
-				break;
-			case 2:
-				filename = "isaacsTestResources/two";
-				break;
-			case 3:
-				filename = "isaacsTestResources/three";
-				break;
-			case 4:
-				filename = "isaacsTestResources/four";
-				break;
-		}
- 		audioSource.clip = Resources.Load(filename) as AudioClip;
+ 		audioSource.clip = Resources.Load("isaacsTestResources/Track2Loop - Agitated strings") as AudioClip;
+
  		audioSource.loop = true;
- 		audioSource.volume = 0.05f;
+ 		audioSource.volume = volumeLevel;
  		audioSource.spatialBlend = 1.0f;
+ 		audioSource.Play();
 
- 		audioSource.PlayDelayed(Random.Range(0.0f,1));
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
+
+	void Update () {	
+
+		
+		if(UnityEngine.Random.Range(0,100) < 1){
+			successRating += 1;
+		}
+
+		//UPDATE AUDIO
+		distanceFromFlock = Vector3.Distance(globalFlock.headingPos, this.transform.position);
+		Vector3 groundPoint = new Vector3(this.transform.position.x, 0, this.transform.position.z);
+		distanceFromGround = Vector3.Distance(this.transform.position, groundPoint);
+
+		if(distanceFromFlock < dangerDistance){
+			volumeLevel = 0.0f;
+		}
+		else{
+			volumeLevel = (distanceFromFlock - dangerDistance) * 0.02f;
+		}
+		
+		audioSource.volume = volumeLevel;
+
+
+
+		//UPDATE HEADING
 		if(Vector3.Distance(transform.position, Vector3.zero) >= globalFlock.sceneSize)
 		{
 			turning = true;
@@ -61,11 +77,11 @@ public class flock : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation,
 													Quaternion.LookRotation(direction),
 													rotationSpeed * Time.deltaTime);
-			speed = Random.Range(0.5f,2);
+			speed = UnityEngine.Random.Range(0.5f,2);
 		}
 		else{
 
-			if(Random.Range(0,6) < 1){
+			if(UnityEngine.Random.Range(0,6) < 1){
 				ApplyRules();
 			}
 		}
@@ -74,6 +90,8 @@ public class flock : MonoBehaviour {
 		transform.Translate(0,0, Time.deltaTime * speed);
 
 	}
+
+	
 
 	void ApplyRules(){
 
@@ -139,8 +157,5 @@ public class flock : MonoBehaviour {
 
 	}
 
+
 }
-
-
-
-

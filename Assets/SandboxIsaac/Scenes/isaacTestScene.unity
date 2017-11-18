@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44659364, g: 0.4964301, b: 0.5748256, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   birdObject: {fileID: 1658390086975204, guid: d3a0e978d0b344c7c8b42b68a1de3272, type: 2}
   goalPrefab: {fileID: 1600516981379480, guid: 10344f46f62864a7ab044b162d645e6e, type: 2}
+  playerSuccess: 1
   switchDirectionX: 0
   switchDirectionY: 0
   switchDirectionZ: 0
@@ -361,6 +362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2959d1997dff24be9ac60dfcf3a0ce45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  successRating: 1
+  speed: 2
   distanceFromFlock: 0
   distanceFromGround: 0
   dangerDistance: 6
@@ -435,6 +438,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 699047160}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &961477395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 961477396}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &961477396
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 961477395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.49209, y: 24.199738, z: 66.95298}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317304948
 GameObject:
