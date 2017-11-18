@@ -6,12 +6,12 @@ public class flock : MonoBehaviour {
 
 	public float speed = 2f;
 	//how fast turn
-	float rotationSpeed = 4.0f;
+	float rotationSpeed = 5.0f;
 
 	Vector3 averageHeading;
 	Vector3 averagePostion;
 	float neighbourDistance = 4.0f;
-
+	float playerDistance;
 	//turn back at end of boundary
 	bool turning = false;
 
@@ -48,13 +48,13 @@ public class flock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Vector3.Distance(transform.position, Vector3.zero) >= globalFlock.sceneSize)
-		{
-			turning = true;
-		}
-		else{
-			turning = false;
-		}
+		// if(Vector3.Distance(transform.position, Vector3.zero) >= globalFlock.sceneSize)
+		// {
+		// 	turning = true;
+		// }
+		// else{
+		// 	turning = false;
+		// }
 
 		if(turning){
 			Vector3 direction = Vector3.zero - transform.position;
@@ -94,6 +94,7 @@ public class flock : MonoBehaviour {
 		float dist;
 
 		int groupSize = 0;
+		//avoid other birds
 		foreach(GameObject go in gos)
 		{
 			if(go != this.gameObject)
@@ -120,6 +121,20 @@ public class flock : MonoBehaviour {
 
 			
 		}
+
+		playerDistance = Vector3.Distance(GameObject.Find("player").transform.position, this.transform.position);
+		if(playerDistance <= neighbourDistance)
+		{
+			vcenter += this.transform.position;
+			groupSize++;
+			//if we are about to collide, too close, we take avoid pos
+			if(playerDistance < 1.0f)
+			{
+				vavoid = vavoid + (this.transform.position - GameObject.Find("player").transform.position);
+			}
+		}
+
+
 		//if bird is in group, calc avg center and speed
 		if(groupSize > 0)
 		{

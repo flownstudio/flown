@@ -47,22 +47,17 @@ public class playerSounds : MonoBehaviour {
 	
 		if(distanceFromFlock < tooCloseDistance){
 			tooCloseVolumeLevel = tooCloseDistance - distanceFromFlock; //increases
-			justRightVolumeLevel = distanceFromFlock * 0.2f; //decreases
+			justRightVolumeLevel = distanceFromFlock * 0.1f; //decreases
 			tooFarVolumeLevel = 0.0f; //nothing
-
-			Debug.Log("too close");
 		}else if(distanceFromFlock < tooFarDistance && distanceFromFlock > tooCloseDistance){
 			tooCloseVolumeLevel = 0.0f; //nothing
 			justRightVolumeLevel = 0.9f; //middle
 			tooFarVolumeLevel = 0.0f; //nothing
-			Debug.Log("just right");
 		}
 		else{
 			tooCloseVolumeLevel = 0.0f; //nothing
-			justRightVolumeLevel = distanceFromFlock * -0.2f; //decreases
+			justRightVolumeLevel = distanceFromFlock * -0.1f; //decreases
 			tooFarVolumeLevel = (distanceFromFlock - tooFarDistance) * 0.1f;//increases
-
-			Debug.Log("too far");
 		}
 		
 		tooCloseAudioSource.volume = tooCloseVolumeLevel;
