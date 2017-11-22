@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerControllerMaster : MonoBehaviour {
 
 	//Public variables
 	public Swipe swipeControls;
