@@ -111,6 +111,7 @@ public class MouseControl : MonoBehaviour {
 //		Debug.Log("relativePos: " + relativePos);
 	}
 
+
 	//Figure out if this is callable/storable in other scripts.
 	public float[] getCamMouseAngleDiff(){
 		float[] vals = new float[2];

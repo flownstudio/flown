@@ -15,5 +15,6 @@ public class wideCameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		transform.LookAt(target);
+		transform.position += transform.forward * Time.deltaTime * 10.0F;
 	}
 }

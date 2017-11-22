@@ -49,10 +49,10 @@ public class thirdBirdController : MonoBehaviour {
 		// the widening of camera angle
 
 
-//		float primeDistance = 5;// ideal distance to be flying behind the point
+		//		float primeDistance = 5;// ideal distance to be flying behind the point
 
 		//distance betweeen flock and player.
-//		distance = Vector3.Distance (target.transform.position, transform.position);
+		//		distance = Vector3.Distance (target.transform.position, transform.position);
 
 
 
@@ -66,7 +66,7 @@ public class thirdBirdController : MonoBehaviour {
 
 		transform.position += transform.forward * Time.deltaTime * speed;
 		birdModel.transform.position = transform.position + spaceBuffer;
-			
+
 
 		//Debug
 		Debug.Log("DISTANCE: " + distance);
@@ -86,8 +86,8 @@ public class thirdBirdController : MonoBehaviour {
 		Quaternion directLook, playerLook;
 
 		//get direction of point on path in relation to camera
-//		centerPoint = attachedCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-			
+		//		centerPoint = attachedCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
 		//get the two orientation/directions
 		directLook = Quaternion.LookRotation(birdModel.transform.position - attachedCamera.transform.position);
 
@@ -125,7 +125,7 @@ public class thirdBirdController : MonoBehaviour {
 
 
 		//Compare the Quaternions by getting their angle between two
-//		compareAngle = Quaternion.Angle (playerLook, directLook);
+		//		compareAngle = Quaternion.Angle (playerLook, directLook);
 
 
 
