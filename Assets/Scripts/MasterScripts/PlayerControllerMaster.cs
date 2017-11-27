@@ -89,8 +89,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 
 			//Debug
-			Debug.Log("DISTANCE: " + distance);
-			Debug.Log("SPEED: " + speed);
+//			Debug.Log("DISTANCE: " + distance);
+//			Debug.Log("SPEED: " + speed);
 
 			//float terrainHeightWhereWeAre = Terrain.activeTerrain.SampleHeight( transform.position );
 			//if (terrainHeightWhereWeAre > transform.position.y){
