@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerSounds : MonoBehaviour {
+
+
+public class playerSounds_Joey : MonoBehaviour {
+
+	public Swipe swipeControls;
 
 	public float tooFarDistance;
 	public float tooCloseDistance;
@@ -14,6 +18,7 @@ public class playerSounds : MonoBehaviour {
 	AudioSource tooCloseAudioSource;
 	private float justRightVolumeLevel = 0.0f;
 	AudioSource justRightAudioSource;
+	AudioSource flapAudioSource;
 
 	// Use this for initialization
 	void Start () {
@@ -23,26 +28,38 @@ public class playerSounds : MonoBehaviour {
  		tooFarAudioSource.loop = true;
  		tooFarAudioSource.volume = tooFarVolumeLevel;
  		tooFarAudioSource.spatialBlend = 1.0f;
- 		tooFarAudioSource.Play();
+ 		//tooFarAudioSource.Play();
 
  		tooCloseAudioSource = gameObject.AddComponent<AudioSource>();
  		tooCloseAudioSource.clip = Resources.Load("isaacsTestResources/ctwo") as AudioClip;
  		tooCloseAudioSource.loop = true;
  		tooCloseAudioSource.volume = tooCloseVolumeLevel;
  		tooCloseAudioSource.spatialBlend = 1.0f;
- 		tooCloseAudioSource.Play();
+ 		//tooCloseAudioSource.Play();
 
  		justRightAudioSource = gameObject.AddComponent<AudioSource>();
  		justRightAudioSource.clip = Resources.Load("isaacsTestResources/cthree") as AudioClip;
  		justRightAudioSource.loop = true;
  		justRightAudioSource.volume = justRightVolumeLevel;
  		justRightAudioSource.spatialBlend = 1.0f;
- 		justRightAudioSource.Play();
+ 		//justRightAudioSource.Play();
+
+		flapAudioSource = gameObject.AddComponent<AudioSource>();
+		flapAudioSource.clip = Resources.Load("flap3") as AudioClip;
+		flapAudioSource.loop = true;
+		flapAudioSource.volume = 1f;
+		//flapAudioSource.spatialBlend = 1.0f;
+		//flapAudioSource.Play();
 
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if(swipeControls.Tap)
+		{
+			flapAudioSource.Play();
+		}
+
 		float distanceFromFlock = this.GetComponent<playerScriptIsaac>().distanceFromFlock;
 
 		if(distanceFromFlock < tooCloseDistance){
@@ -63,6 +80,10 @@ public class playerSounds : MonoBehaviour {
 		tooCloseAudioSource.volume = tooCloseVolumeLevel;
 		justRightAudioSource.volume = justRightVolumeLevel;
 		tooFarAudioSource.volume = tooFarVolumeLevel;
+
+
 	}
+
+
 
 }
