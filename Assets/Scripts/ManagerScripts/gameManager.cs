@@ -48,6 +48,7 @@ public class gameManager : MonoBehaviour
 
 		if(level != 0){
 			worldScript.SetupScene(level);
+			Cursor.visible = false;
 		}else {
 			Cursor.visible = true;
 		}
@@ -67,8 +68,8 @@ public class gameManager : MonoBehaviour
 		Debug.Log ("Level "+level+" was loaded.");
 
 		if (level != 0) {
-			
 			worldScript.SetupScene (level);
+			Cursor.visible = false;
 		} else {
 			Cursor.visible = true;
 		}

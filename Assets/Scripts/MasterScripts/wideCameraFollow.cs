@@ -15,6 +15,8 @@ public class wideCameraFollow : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		transform.LookAt(target);
+
+		//TODO: add the bird speed in here. 
 		transform.position += transform.forward * Time.deltaTime * 10.0F;
 	}
 }

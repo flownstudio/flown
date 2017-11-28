@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class globalFlock : MonoBehaviour {
 
+	public GameObject sceneController;
 	public GameObject player;
 	public GameObject birdObject;
 	public GameObject goalPrefab;
 	public static int sceneSize = 100;
 
-	public int playerSuccess = 1;
+	public float playerSuccess = 1;
 	Vector3 playerPosition;
 
 	public static int numOfBirds = 300;
@@ -26,8 +27,11 @@ public class globalFlock : MonoBehaviour {
 	public float headingMaxDistanceFromPlayer = 80;
 	public bool waitingForPlayer = false;
 
+	private sceneController playerStats;
+
 	// Use this for initialization
 	void Start () {
+		playerStats = sceneController.GetComponent<sceneController> ();
 		// make the birds up to max num of birds
 		for(int i = 0; i < numOfBirds; i++){
 			//Generate a position around current player position
@@ -43,7 +47,7 @@ public class globalFlock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// update visibilit of birds in flock based upon player score.
-		playerSuccess = player.GetComponent<playerScriptIsaac>().successRating;
+		playerSuccess = sceneController.GetComponent<sceneController>().successRating;
 		birdVisibility();
 
 		// how far away from, the heading is the player
@@ -71,7 +75,12 @@ public class globalFlock : MonoBehaviour {
 					// if(zPos >= sceneSize ||  zPos <= -sceneSize){
 					// 	switchDirectionZ = !switchDirectionZ;
 					// }
+
+					float speed = playerStats.speed;
+					// TODO: zPos changes with player speed
 					zPos += 5f;
+
+
 				}else{
 					waitingForPlayer = true;
 				}
@@ -101,7 +110,7 @@ public class globalFlock : MonoBehaviour {
 			}
 		}
 		//switch birds off
-		for(int i = playerSuccess; i < numOfBirds; i++){
+		for(int i = (int)playerSuccess; i < numOfBirds; i++){
 			if(gos[i].active){
 				gos[i].SetActive(false);
 			}

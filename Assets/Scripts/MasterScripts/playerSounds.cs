@@ -43,7 +43,7 @@ public class playerSounds : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {		
-		float distanceFromFlock = this.GetComponent<playerScriptIsaac>().distanceFromFlock;
+		float distanceFromFlock = GameObject.Find("sceneController").GetComponent<sceneController>().distanceFromFlock;
 	
 		if(distanceFromFlock < tooCloseDistance){
 			tooCloseVolumeLevel = tooCloseDistance - distanceFromFlock; //increases
