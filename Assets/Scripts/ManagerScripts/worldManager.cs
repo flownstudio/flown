@@ -58,6 +58,7 @@ public class worldManager : MonoBehaviour {
 	//Do we need this??
 	void TerrainSetup ()
 	{
+		GameObject.Find("mapGenerator").GetComponent<endlessTerrain>().initTerrain();
 
 	}
 
@@ -104,7 +105,7 @@ public class worldManager : MonoBehaviour {
 	public void SetupScene (int level)
 	{
 		Debug.Log ("Do Something CRazy");
-//			TerrainSetup ();
+			TerrainSetup ();
 
 			//Reset our list of gridpositions.
 //			InitialiseList ();

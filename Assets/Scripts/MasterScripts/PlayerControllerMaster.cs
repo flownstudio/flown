@@ -37,7 +37,6 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Cursor.visible = false;
 		gyroEnabled = EnableGyro();
 
 		rigidbody = transform.GetComponent<Rigidbody>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class flock : MonoBehaviour {
 
-		public float speed = 10f;
+	public float speed = 10f;
 	//how fast turn
 	float rotationSpeed = 5.0f;
 	Vector3 averageHeading;
@@ -85,12 +85,12 @@ public class flock : MonoBehaviour {
 
 		Vector3 headingPos = globalFlock.headingPos;
 
-		playerDistance = Vector3.Distance(GameObject.Find("rotated_starling").transform.position, this.transform.position);
+		playerDistance = Vector3.Distance(GameObject.Find("Player").transform.position, this.transform.position);
 		headingDistance = Vector3.Distance(globalFlock.headingPos, this.transform.position);
-		playerDistanceFromFlock = GameObject.Find("rotated_starling").GetComponent<playerScriptIsaac>().distanceFromFlock;
+		playerDistanceFromFlock = GameObject.Find("Player").GetComponent<playerScriptIsaac>().distanceFromFlock;
 		// if the player is too far from the heading leave the player
 		if(playerDistanceFromFlock < maxPlayerDistanceFromFlock){
-			headingPos = GameObject.Find("rotated_starling").transform.position;
+			headingPos = GameObject.Find("Player").transform.position;
 		}
 
 		float dist;

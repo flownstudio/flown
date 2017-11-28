@@ -21,7 +21,15 @@ public class endlessTerrain : MonoBehaviour {
 	Dictionary<Vector2, TerrainChunk> terrainChunkDictionary = new Dictionary<Vector2, TerrainChunk>();
 	static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>(); 
 
+	private bool initialized = false;
+
 	void Start() {
+//		initTerrain ();
+	}
+
+	public void initTerrain(){
+		initialized = true;
+		terrainChunksVisibleLastUpdate.Clear();
 		MapGenerator = FindObjectOfType<mapGenerator>();
 		maxViewDist = detailLevels[detailLevels.Length-1].visibleDstThreshold;
 		chunkSize = mapGenerator.mapChunkSize-1;
@@ -30,10 +38,12 @@ public class endlessTerrain : MonoBehaviour {
 	}
 
 	void Update() {
-		viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale;
-		if ((viewerPositionOld-viewerPosition).sqrMagnitude > sqrviewerMoveThresholdforChunkUpdate) {
-			viewerPositionOld = viewerPosition;
-			UpdateVisibleChunks();
+		if (initialized) {
+			viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
+			if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrviewerMoveThresholdforChunkUpdate) {
+				viewerPositionOld = viewerPosition;
+				UpdateVisibleChunks ();
+			}
 		}
 	}
 
