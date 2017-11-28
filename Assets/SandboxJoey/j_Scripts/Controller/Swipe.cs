@@ -20,6 +20,7 @@ public class Swipe : MonoBehaviour
 		{
 			Debug.Log ("Tap..");
 			tap = true;
+			Handheld.Vibrate ();
 			isDragging = true;
 			startTouch = Input.mousePosition;
 		}
