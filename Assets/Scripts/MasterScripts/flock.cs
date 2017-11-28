@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class flock : MonoBehaviour {
 
-		public float speed = 10f;
+	public float speed = 10f;
 	//how fast turn
 	float rotationSpeed = 5.0f;
 	Vector3 averageHeading;
@@ -26,35 +26,35 @@ public class flock : MonoBehaviour {
 
 		int filenumber = Random.Range(1,4);
 		switch(filenumber){
-			case 1:
-				filename = "isaacsTestResources/one";
-				break;
-			case 2:
-				filename = "isaacsTestResources/two";
-				break;
-			case 3:
-				filename = "isaacsTestResources/three";
-				break;
-			case 4:
-				filename = "isaacsTestResources/four";
-				break;
+		case 1:
+			filename = "isaacsTestResources/one";
+			break;
+		case 2:
+			filename = "isaacsTestResources/two";
+			break;
+		case 3:
+			filename = "isaacsTestResources/three";
+			break;
+		case 4:
+			filename = "isaacsTestResources/four";
+			break;
 		}
- 		audioSource.clip = Resources.Load(filename) as AudioClip;
- 		audioSource.loop = true;
- 		audioSource.volume = 0.05f;
- 		audioSource.spatialBlend = 1.0f;
+		audioSource.clip = Resources.Load(filename) as AudioClip;
+		audioSource.loop = true;
+		audioSource.volume = 0.05f;
+		audioSource.spatialBlend = 1.0f;
 
- 		audioSource.PlayDelayed(Random.Range(0.0f,1));
+		audioSource.PlayDelayed(Random.Range(0.0f,1));
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
 		if(turning){
 			Vector3 direction = Vector3.zero - transform.position;
 			transform.rotation = Quaternion.Slerp(transform.rotation,
-													Quaternion.LookRotation(direction),
-													rotationSpeed * Time.deltaTime);
+				Quaternion.LookRotation(direction),
+				rotationSpeed * Time.deltaTime);
 			speed = Random.Range(0.5f,2);
 		}
 		else{
@@ -85,12 +85,12 @@ public class flock : MonoBehaviour {
 
 		Vector3 headingPos = globalFlock.headingPos;
 
-		playerDistance = Vector3.Distance(GameObject.Find("rotated_starling").transform.position, this.transform.position);
+		playerDistance = Vector3.Distance(GameObject.Find("Player").transform.position, this.transform.position);
 		headingDistance = Vector3.Distance(globalFlock.headingPos, this.transform.position);
-		playerDistanceFromFlock = GameObject.Find("rotated_starling").GetComponent<playerScriptIsaac>().distanceFromFlock;
+		playerDistanceFromFlock = GameObject.Find("sceneController").GetComponent<sceneController>().distanceFromFlock;
 		// if the player is too far from the heading leave the player
 		if(playerDistanceFromFlock < maxPlayerDistanceFromFlock){
-			headingPos = GameObject.Find("rotated_starling").transform.position;
+			headingPos = GameObject.Find("Player").transform.position;
 		}
 
 		float dist;
@@ -121,10 +121,10 @@ public class flock : MonoBehaviour {
 
 			}
 
-			
+
 		}
 
-		
+
 		//if bird is in group, calc avg center and speed
 		if(groupSize > 0)
 		{
@@ -136,8 +136,8 @@ public class flock : MonoBehaviour {
 			{
 				//Slerp slowly turns us in the direction we are going
 				transform.rotation = Quaternion.Slerp(transform.rotation,
-													Quaternion.LookRotation(direction),
-													rotationSpeed * Time.deltaTime);
+					Quaternion.LookRotation(direction),
+					rotationSpeed * Time.deltaTime);
 			}
 		}
 

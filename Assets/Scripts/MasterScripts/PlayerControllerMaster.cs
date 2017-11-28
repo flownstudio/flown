@@ -6,17 +6,20 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	//Public variables
 	public Swipe swipeControls;
+	public GameObject sceneController;
 
 	public Camera attachedCamera;// Model that we are putting in front of camera
 //	public GameObject birdModel;
 //	public Vector3 spaceBuffer;
 
 	private Rigidbody rigidbody;
-	private float speed = 30.0F;
+	public float speed = 30.0F;
 	private float distance, eulerZ, eulerX, eulerY;
 
 	private bool gyroEnabled;
 	private Gyroscope gyro;
+	private sceneController playerStats;
+
 
 	//-------------------------------
 	//Gyro calibration variables
@@ -37,9 +40,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Cursor.visible = false;
 		gyroEnabled = EnableGyro();
-
+		playerStats = sceneController.GetComponent<sceneController> ();
 		rigidbody = transform.GetComponent<Rigidbody>();
 	}
 
@@ -61,6 +63,10 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	private void Update(){
 
+
+		// Now you have the player stats available
+		// playerStats.autoPilot
+		// etc (check sceneController)
 
 
 		if(gyroEnabled){
@@ -185,11 +191,19 @@ public class PlayerControllerMaster : MonoBehaviour {
 	
 	}
 
+
+	//TODO: make autopilot.... 
+	// Now you have the player stats available
+	// playerStats.autoPilot
+
+
 	void OnGUI() {
 		//		string gui = "X: " + eulerX + ", Y: " + eulerY +", Z: " + eulerZ;
 		string gui = "Speed: " + speed;
 		GUI.Label(new Rect(10, 10, 500, 20), gui );
 	}
+
+
 
 
 

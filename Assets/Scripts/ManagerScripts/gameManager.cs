@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;       //Allows us to use Lists. 
 
 public class gameManager : MonoBehaviour
@@ -8,7 +8,7 @@ public class gameManager : MonoBehaviour
 
 	public static gameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 	private worldManager worldScript;                       //Store a reference to our BoardManager which will set up the level.
-	private int level = 1;                                  //Current level number, expressed in game as "Day 1".
+	private int level = 0;                                  //Current level number, expressed in game as "Day 1".
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -22,8 +22,8 @@ public class gameManager : MonoBehaviour
 		//If instance already exists and it's not this:
 		else if (instance != this)
 
-			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-			Destroy(gameObject);    
+		//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+		Destroy(gameObject);    
 
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
@@ -33,6 +33,10 @@ public class gameManager : MonoBehaviour
 		//Have the weather/season change.
 		//
 		worldScript = GetComponent<worldManager>();
+
+		Scene scene = SceneManager.GetActiveScene();
+		level = scene.buildIndex;
+		Debug.Log("Active scene is '" + scene.buildIndex + "'.");
 
 		InitGame ();
 	}
@@ -44,6 +48,9 @@ public class gameManager : MonoBehaviour
 
 		if(level != 0){
 			worldScript.SetupScene(level);
+			Cursor.visible = false;
+		}else {
+			Cursor.visible = true;
 		}
 
 	}
@@ -53,21 +60,18 @@ public class gameManager : MonoBehaviour
 	{
 		Debug.Log ("Clicked");
 		//		loadingImage.SetActive(true);
-		Application.LoadLevel(l);
+		SceneManager.LoadScene(l);
 	}
 
-	//Have a load scene additive mode for the different seasons
-	//i.e. the terrain could persist and we destory the last levels wind tunnels or something
-	//call this when bird flys through "exit object" see worldManager
-	public static void LoadSceneAdditive(int l){
-		Application.LoadLevelAdditive (l);
-	}
 
 	void OnLevelWasLoaded(int level){
 		Debug.Log ("Level "+level+" was loaded.");
 
-		if(level != 0){
-			worldScript.SetupScene(level);
+		if (level != 0) {
+			worldScript.SetupScene (level);
+			Cursor.visible = false;
+		} else {
+			Cursor.visible = true;
 		}
 
 	}
