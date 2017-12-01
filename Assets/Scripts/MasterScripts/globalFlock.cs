@@ -38,9 +38,13 @@ public class globalFlock : MonoBehaviour {
 			Vector3 pos = new Vector3(0,0,0);
 			// add bird to list of birds
 			allBirds[i] = (GameObject) Instantiate(birdObject, pos, Quaternion.identity);
-			// TODO : make bird animation state so it can fade in. maybe alpha = 0?
-			// make the bird object inactive
+			
+
 			birdObject.SetActive(false);
+
+			// TODO : starting color of fade in bird, something like this:
+            //Color color = new Color(1, 1, 1, 0);
+            //birdObject.transform.GetComponent<Renderer>().material.SetColor("_Color", color);
 		}
 	}
 	
@@ -98,20 +102,22 @@ public class globalFlock : MonoBehaviour {
 		for(int i = 0; i < playerSuccess; i++){	
 			// if bird isnt active make active
 			if(!gos[i].active){
-				// TODO: check the direction the player is facing. currently only places
-				// behind if the player is facing  forward in space, if facing back the
-				// new bird is positioned right in front of you
-				gos[i].transform.position = new Vector3(
-						UnityEngine.Random.Range(playerPosition.x-1, playerPosition.x),
-						UnityEngine.Random.Range(playerPosition.y-1, playerPosition.y),
-						UnityEngine.Random.Range(playerPosition.z-29, playerPosition.z-20));
+
+				//TODO: TWEAK DISTANCE BEHIND
+				// birds load in behind the player, rather than on player.z - distance. 
+
+				float distanceBehind = 20;
+				Vector3 backwardsFromPlayer = player.transform.position - (player.transform.forward * distanceBehind);
+				gos[i].transform.position = backwardsFromPlayer;
+ 
 				gos[i].SetActive(true);
-				// TODO : fade in bird 
+				//FADE INfromAlpha(gos[i]);
 			}
 		}
 		//switch birds off
 		for(int i = (int)playerSuccess; i < numOfBirds; i++){
 			if(gos[i].active){
+				//FADE OUT ToAlpha(gos[i]);
 				gos[i].SetActive(false);
 			}
 		}
@@ -119,5 +125,33 @@ public class globalFlock : MonoBehaviour {
 		
 	}
 
+	//FADING IN SOMTHING LIKE THIS
+	// void ToAlpha (GameObject birdObject) {
+  
+ //         float alpha = birdObject .material.color.a;
+         
+ //         while(alpha > 0) {
+         
+ //             alpha -= Time.deltaTime;
+ //             Color newColor = new Color(1, 1, 1, alpha);
+ //             birdObject. .material.color = newColor;
+             
+ //         }
+         
+ //     }
+     
+ //    void fromAlpha (GameObject birdObject) {
+         
+ //         float alpha = birdObject. .material.color.a;
+         
+ //             while(alpha < 1) {
+             
+ //             alpha += Time.deltaTime;
+ //             Color newColor = new Color(1, 1, 1, alpha);
+ //             birdObject. .material.color = newColor;
+             
+ //         }
+         
+ //    }
 
 }
