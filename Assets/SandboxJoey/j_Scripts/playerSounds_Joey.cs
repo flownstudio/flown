@@ -60,7 +60,7 @@ public class playerSounds_Joey : MonoBehaviour {
 			flapAudioSource.Play();
 		}
 
-		float distanceFromFlock = this.GetComponent<playerScriptIsaac>().distanceFromFlock;
+		float distanceFromFlock = this.GetComponent<sceneController>().distanceFromFlock;
 
 		if(distanceFromFlock < tooCloseDistance){
 			tooCloseVolumeLevel = tooCloseDistance - distanceFromFlock; //increases
