@@ -16,6 +16,7 @@ public class sceneController : MonoBehaviour {
 	public float distanceFromFlock;
 	public float distanceFromGround;
 	public float dangerDistance = 12f;
+	public float playerSpeed;
 
 	public bool autoPilot = false;
 
@@ -25,13 +26,17 @@ public class sceneController : MonoBehaviour {
 	int maxNumOfBirds = 200;
 
 	private PlayerControllerMaster playerControllerMaster;
-	private float playerSpeed;
+	private Material playerMaterial;
+
 
 
 	void Start () 
 	{
 		playerControllerMaster = player.GetComponent<PlayerControllerMaster> ();
 		playerSpeed = playerControllerMaster.speed;
+
+		Renderer renderer = player.transform.Find("rotated_starling_UV").gameObject.GetComponent<Renderer>();
+		playerMaterial = renderer.sharedMaterials[0];
 
 		//Disable all cameras and make the first in the list enabled
 
@@ -70,12 +75,14 @@ public class sceneController : MonoBehaviour {
 			cameraList [currentCamera].gameObject.SetActive (true);
 			Cursor.visible = true;
 			autoPilot = true;
+			playerMaterial.DisableKeyword("_EMISSION");
 		}else {//if it is, current camera is the first in the array BIRD VIEW
 			cameraList [currentCamera - 1].gameObject.SetActive (false);
 			currentCamera = 0;
 			cameraList [currentCamera].gameObject.SetActive (true);
 			Cursor.visible = false;
 			autoPilot = false;
+			playerMaterial.EnableKeyword("_EMISSION");
 		}
 
 
@@ -85,21 +92,23 @@ public class sceneController : MonoBehaviour {
 		// This is just to test the visibility of other birds adding them in
 		// one at a time.
 		// 1% chance this frame adds a bird up to max birds then goes back down
-		if(UnityEngine.Random.Range(0,100) < 1){
-			if(scoreDirectionUp){
-				successRating += 1;
-				if(successRating == maxNumOfBirds){
-					scoreDirectionUp = false;
-				}
-			}
-			else{
-				successRating -= 1;
-				if(successRating == 0){
-					scoreDirectionUp = true;
+
+		if (!autoPilot) {// hack for now so birds don't pop in while wide angle POV is on
+			
+			if (UnityEngine.Random.Range (0, 100) < 1) {
+				if (scoreDirectionUp) {
+					successRating += 1;
+					if (successRating == maxNumOfBirds) {
+						scoreDirectionUp = false;
+					}
+				} else {
+					successRating -= 1;
+					if (successRating == 0) {
+						scoreDirectionUp = true;
+					}
 				}
 			}
 		}
-
 		// TODO: adjust flock speed depending on distance
 		distanceFromFlock = Vector3.Distance(globalFlock.headingPos, this.transform.position);
 		Vector3 groundPoint = new Vector3(this.transform.position.x, 0, this.transform.position.z);

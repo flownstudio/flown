@@ -6,17 +6,18 @@ public class wideCameraFollow : MonoBehaviour {
 
 	public Transform target;
 	public Vector3 offset;
+	public GameObject sceneController;
+	private float birdspeed;
 
 	// Use this for initialization
 	void Start () {
-		
+		birdspeed = sceneController.GetComponent<sceneController> ().playerSpeed;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		transform.LookAt(target);
 
-		//TODO: add the bird speed in here. 
-		transform.position += transform.forward * Time.deltaTime * 10.0F;
+		transform.position += transform.forward * Time.deltaTime * birdspeed/2;
 	}
 }

@@ -6,9 +6,9 @@ using System.Collections.Generic;       //Allows us to use Lists.
 public class gameManager : MonoBehaviour
 {
 
-	public static gameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-	private worldManager worldScript;                       //Store a reference to our BoardManager which will set up the level.
+	public static gameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.                     //Store a reference to our BoardManager which will set up the level.
 	private int level = 0;                                  //Current level number, expressed in game as "Day 1".
+	private endlessTerrain mapGenerator; 
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -32,11 +32,14 @@ public class gameManager : MonoBehaviour
 		//Have scene prefabs with world managers and progressively more interesting/diffcult challenges
 		//Have the weather/season change.
 		//
-		worldScript = GetComponent<worldManager>();
 
 		Scene scene = SceneManager.GetActiveScene();
 		level = scene.buildIndex;
 		Debug.Log("Active scene is '" + scene.buildIndex + "'.");
+
+		if(level != 0){
+			mapGenerator = GameObject.Find("mapGenerator").GetComponent<endlessTerrain>();
+		}
 
 		InitGame ();
 	}
@@ -47,7 +50,7 @@ public class gameManager : MonoBehaviour
 		//Call the SetupScene function of the BoardManager script, pass it current level number.
 
 		if(level != 0){
-			worldScript.SetupScene(level);
+			mapGenerator.initTerrain ();
 			Cursor.visible = false;
 		}else {
 			Cursor.visible = true;
@@ -68,7 +71,8 @@ public class gameManager : MonoBehaviour
 		Debug.Log ("Level "+level+" was loaded.");
 
 		if (level != 0) {
-			worldScript.SetupScene (level);
+			mapGenerator = GameObject.Find("mapGenerator").GetComponent<endlessTerrain>();
+			mapGenerator.initTerrain ();
 			Cursor.visible = false;
 		} else {
 			Cursor.visible = true;
