@@ -68,7 +68,12 @@ public class PlayerControllerMaster : MonoBehaviour {
 	private void Update(){
 
 
-		if(gyroEnabled){
+		// Now you have the player stats available
+		// playerStats.autoPilot
+		// etc (check sceneController)
+
+
+		if (gyroEnabled && !playerStats.autoPilot) {
 			GyroPlayer ();
 
 			float bias = 0.96f;
@@ -76,7 +81,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + transform.up * 5.0f; // camera offset positions
 			attachedCamera.transform.position = attachedCamera.transform.position * bias + moveCamTo * (1.0f - bias); // moves the camera, elastically and bias
 			attachedCamera.transform.LookAt (transform.position + transform.forward * 30.0f); // rotating the camera
-		}else{
+
+		} else if (!playerStats.autoPilot) {
 
 			float bias = 0.96f;
 
@@ -109,8 +115,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 
 			//Debug
-			//Debug.Log("DISTANCE: " + distance);
-			//Debug.Log("SPEED: " + speed);
+//			Debug.Log("DISTANCE: " + distance);
+//			Debug.Log("SPEED: " + speed);
 
 			//float terrainHeightWhereWeAre = Terrain.activeTerrain.SampleHeight( transform.position );
 			//if (terrainHeightWhereWeAre > transform.position.y){
@@ -118,6 +124,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 			//									 terrainHeightWhereWeAre,
 			//									 transform.position.z);
 			//}
+		} else {
+			transform.position += transform.forward * Time.deltaTime * speed;
 		}
 
 
