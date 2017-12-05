@@ -70,12 +70,6 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 
 		if(gyroEnabled){
 			GyroPlayer ();
-
-			float bias = 0.96f;
-
-			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + transform.up * 5.0f; // camera offset positions
-			attachedCamera.transform.position = attachedCamera.transform.position * bias + moveCamTo * (1.0f - bias); // moves the camera, elastically and bias
-			attachedCamera.transform.LookAt (transform.position + transform.forward * 30.0f); // rotating the camera
 		}else{
 
 			float bias = 0.96f;
@@ -99,8 +93,6 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 			if (speed >= maxSpeed) {
 				speed = maxSpeed;
 			}
-
-			//COMMON FILTER - GRPAHING GYRO DATA
 
 			transform.position += transform.forward * speed * Time.deltaTime;
 			transform.Rotate (Input.GetAxis("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));//HOW TO TRANSLATE DIRECTION TO MOBILE?? TIN!!!!
@@ -168,7 +160,7 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 			//transform.position += transform.up * Time.deltaTime * 500f;
 
 			//transform.localPosition = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, transform.position.y + jump, transform.position.z), 10);
-			//Debug.Log (transform.position);
+			Debug.Log (transform.position);
 		}
 		else
 		{
@@ -179,7 +171,7 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 	IEnumerator boostOnYAxis(){
 		flapDistance = 50.0f;
 		rigidbody.velocity = new Vector3 (0, flapDistance, 0);
-		yield return new WaitForSeconds(0.01f);
+		yield return new WaitForSeconds(0.1f);
 		rigidbody.velocity = new Vector3 (0, -flapDistance / 2, 0);
 		yield return new WaitForSeconds(0.2f);
 		rigidbody.velocity = new Vector3(0, 0, 0);
@@ -196,21 +188,6 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 		//		rigidBody.position += transform.forward * Time.deltaTime * speed;
 
 		rigidbody.MovePosition(transform.position + transform.forward * Time.deltaTime * speed);
-
-		//increase slowdown rate
-		speed -= transform.forward.y;
-
-		//Cap speed to minimum value
-		if (speed <= minSpeed) {
-			speed = minSpeed;
-		}
-
-		//Cap to maxSpeed
-		if (speed >= maxSpeed) {
-			speed = maxSpeed;
-		}
-
-
 
 		//		for when looking down AND then subtract when looking up
 		//		rigidbody.AddRelativeForce (transform.forward * speed,ForceMode.Acceleration);
@@ -231,6 +208,7 @@ public class PlayerControllerMaster_Joey : MonoBehaviour {
 		eulerX = test.eulerAngles.x;
 		eulerY = test.eulerAngles.y;
 		eulerZ = test.eulerAngles.z;
+
 
 
 
