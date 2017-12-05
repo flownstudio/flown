@@ -69,9 +69,9 @@ public class PlayerControllerMaster : MonoBehaviour {
 		// etc (check sceneController)
 
 
-		if(gyroEnabled){
+		if (gyroEnabled && !playerStats.autoPilot) {
 			GyroPlayer ();
-		}else{
+		} else if (!playerStats.autoPilot) {
 
 			float bias = 0.96f;
 
@@ -89,14 +89,14 @@ public class PlayerControllerMaster : MonoBehaviour {
 			}
 
 			transform.position += transform.forward * Time.deltaTime * speed;
-			transform.Rotate (Input.GetAxis("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));//HOW TO TRANSLATE DIRECTION TO MOBILE?? TIN!!!!
+			transform.Rotate (Input.GetAxis ("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));//HOW TO TRANSLATE DIRECTION TO MOBILE?? TIN!!!!
 			//birdModel.transform.position = transform.position + spaceBuffer;
 
 
 
 			//Debug
-			Debug.Log("DISTANCE: " + distance);
-			Debug.Log("SPEED: " + speed);
+//			Debug.Log("DISTANCE: " + distance);
+//			Debug.Log("SPEED: " + speed);
 
 			//float terrainHeightWhereWeAre = Terrain.activeTerrain.SampleHeight( transform.position );
 			//if (terrainHeightWhereWeAre > transform.position.y){
@@ -104,6 +104,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 			//									 terrainHeightWhereWeAre,
 			//									 transform.position.z);
 			//}
+		} else {
+			transform.position += transform.forward * Time.deltaTime * speed;
 		}
 
 
@@ -171,30 +173,9 @@ public class PlayerControllerMaster : MonoBehaviour {
 		eulerY = test.eulerAngles.y;
 		eulerZ = test.eulerAngles.z;
 
-
-
-
-		//`maybe to figure out direction
-
-		//		if (eulerY > 180) {
-		////			attachedCamera.transform 
-		//		} else if (eulerY < 180) {
-		//
-		//		}
-		//
-		//		if (eulerX < 180 && speed <= 30.0) {
-		//			speed += 2.0F;
-		//		} else if (eulerX > 180 && speed >= 20.0){
-		//			speed -= 1.0F;
-		//		}
-
 	
 	}
-
-
-	//TODO: make autopilot.... 
-	// Now you have the player stats available
-	// playerStats.autoPilot
+		
 
 
 	void OnGUI() {
