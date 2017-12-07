@@ -76,6 +76,7 @@ public class sceneController : MonoBehaviour {
 			Cursor.visible = true;
 			autoPilot = true;
 			playerMaterial.DisableKeyword("_EMISSION");
+			//TODO: switch off the particle systems and all emmission matarials
 		}else {//if it is, current camera is the first in the array BIRD VIEW
 			cameraList [currentCamera - 1].gameObject.SetActive (false);
 			currentCamera = 0;
