@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: 5d9cfa5311fbb42549df328a28102491
+timeCreated: 1512495795
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Armature
+    100004: Body
+    100006: Camera
+    100008: Head
+    100010: Head_end
+    100012: Icosphere
+    100014: Left tail
+    100016: Left tail_end
+    100018: Left wing body
+    100020: Left wing centre
+    100022: Left wing tip
+    100024: Left wing tip_end
+    100026: Right tail
+    100028: Right tail_end
+    100030: Right wing body
+    100032: Right wing centre
+    100034: Right wing tip
+    100036: Right wing tip_end
+    100038: Tail
+    400000: //RootNode
+    400002: Armature
+    400004: Body
+    400006: Camera
+    400008: Head
+    400010: Head_end
+    400012: Icosphere
+    400014: Left tail
+    400016: Left tail_end
+    400018: Left wing body
+    400020: Left wing centre
+    400022: Left wing tip
+    400024: Left wing tip_end
+    400026: Right tail
+    400028: Right tail_end
+    400030: Right wing body
+    400032: Right wing centre
+    400034: Right wing tip
+    400036: Right wing tip_end
+    400038: Tail
+    2000000: Camera
+    4300000: Icosphere
+    7400000: Armature|ArmatureAction
+    9500000: //RootNode
+    13700000: Icosphere
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beak
+    second: {fileID: 2100000, guid: 6560152c23c03404082a31ee3e8cc2f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: ec4059bd361bb4b5f871e23ca1cdd939, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2100000, guid: 2fd9b01307a5948c8bcf7e585a5ee8c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White
+    second: {fileID: 2100000, guid: 816caa92200b64a9aac9c0a5efbd8dbd, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
