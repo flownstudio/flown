@@ -7,8 +7,8 @@ public class gameManager : MonoBehaviour
 {
 
 	public static gameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.                     //Store a reference to our BoardManager which will set up the level.
-	private int level = 0;                                  //Current level number, expressed in game as "Day 1".
-	private endlessTerrain mapGenerator; 
+	public static int level = 0;                                  //Current level number, expressed in game as "Day 1".
+	public static GameObject challenges = null;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -37,9 +37,7 @@ public class gameManager : MonoBehaviour
 		level = scene.buildIndex;
 		Debug.Log("Active scene is '" + scene.buildIndex + "'.");
 
-		if(level != 0){
-			mapGenerator = GameObject.Find("mapGenerator").GetComponent<endlessTerrain>();
-		}
+//		getSceneChallenges ();
 
 		InitGame ();
 	}
@@ -47,14 +45,32 @@ public class gameManager : MonoBehaviour
 	//Initializes the game for each level.
 	void InitGame()
 	{
-		//Call the SetupScene function of the BoardManager script, pass it current level number.
 
-		if(level != 0){
-			mapGenerator.initTerrain ();
+		if(level != 0){//This is just here so we can start game from main not have to use menu scene always
+			GameObject.Find("mapGenerator").GetComponent<endlessTerrain>().initTerrain ();
+			GameObject[] rootObjects = SceneManager.GetSceneByBuildIndex (level).GetRootGameObjects();
+
+			foreach (GameObject obj in rootObjects) {
+				if (obj.name == "SceneChallenges")
+					challenges = obj;
+			}
+
 			Cursor.visible = false;
 		}else {
 			Cursor.visible = true;
 		}
+
+	}
+
+	public static void activateSceneChallenges(bool activate){
+		
+		if (level != 0) {
+			if (activate && challenges) { //setting the challegnes from inactive to active
+				challenges.SetActive (true);
+			} else{// finding the active scene challenges, storing it first then set to inactive
+				challenges.SetActive (false);
+			} 
+		} 
 
 	}
 
@@ -63,23 +79,46 @@ public class gameManager : MonoBehaviour
 	{
 		Debug.Log ("Clicked");
 		//		loadingImage.SetActive(true);
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
 		SceneManager.LoadScene(l);
 	}
 
-
-	void OnLevelWasLoaded(int level){
-		Debug.Log ("Level "+level+" was loaded.");
-
-		if (level != 0) {
-			mapGenerator = GameObject.Find("mapGenerator").GetComponent<endlessTerrain>();
-			mapGenerator.initTerrain ();
-			Cursor.visible = false;
-		} else {
-			Cursor.visible = true;
-		}
+	public static void LoadSceneAdditive(int l)
+	{
+		Debug.Log ("Clicked");
+		//		loadingImage.SetActive(true);
+		SceneManager.sceneLoaded += OnLevelFinishedLoading;
+		SceneManager.LoadScene(l, LoadSceneMode.Additive);
 
 	}
 
+	public static void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
+		Debug.Log ("Level "+scene+" was loaded. Mode: "+mode);
+		level = scene.buildIndex;
+
+		Debug.Log (level);
+
+		if (level != 0) {
+			if (level == 1) {
+				GameObject.Find ("mapGenerator").GetComponent<endlessTerrain> ().initTerrain ();
+				Cursor.visible = false;
+			}
+
+			GameObject[] rootObjects = SceneManager.GetSceneByBuildIndex (level).GetRootGameObjects();
+
+			foreach (GameObject obj in rootObjects) {
+				if (obj.name == "SceneChallenges")
+					challenges = obj;
+			}
+
+			Cursor.visible = false;
+			SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+		}else{
+			Cursor.visible = true;
+			SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+		}
+
+	}
 
 	//Update is called every frame.
 	void Update()

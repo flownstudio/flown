@@ -29,7 +29,6 @@ public class sceneController : MonoBehaviour {
 	private Material playerMaterial;
 
 
-
 	void Start () 
 	{
 		playerControllerMaster = player.GetComponent<PlayerControllerMaster> ();
@@ -76,7 +75,7 @@ public class sceneController : MonoBehaviour {
 			Cursor.visible = true;
 			autoPilot = true;
 			playerMaterial.DisableKeyword("_EMISSION");
-			//TODO: switch off the particle systems and all emmission matarials
+			gameManager.activateSceneChallenges (false);
 		}else {//if it is, current camera is the first in the array BIRD VIEW
 			cameraList [currentCamera - 1].gameObject.SetActive (false);
 			currentCamera = 0;
@@ -84,6 +83,7 @@ public class sceneController : MonoBehaviour {
 			Cursor.visible = false;
 			autoPilot = false;
 			playerMaterial.EnableKeyword("_EMISSION");
+			gameManager.activateSceneChallenges (true);
 		}
 
 
