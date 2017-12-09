@@ -26,6 +26,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 	private Gyroscope gyro;
 	private sceneController playerStats;
 
+	static Animator anim;
+
 	//-------------------------------
 	//Gyro calibration variables
 	private const float lowPassFilterFactor = 0.2f;
@@ -49,6 +51,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 		gyroEnabled = EnableGyro();
 		playerStats = sceneController.GetComponent<sceneController> ();
 		rigidbody = transform.GetComponent<Rigidbody>();
+		anim = GameObject.Find ("animatedstarling2").GetComponent<Animator>();
+
 	}
 
 	private bool EnableGyro(){
@@ -170,18 +174,19 @@ public class PlayerControllerMaster : MonoBehaviour {
 		//increase speed
 		isFlapping = true;
 
-		if (isFlapping)
-		{
+		if (isFlapping){
 			speed += acceleration;
 			StartCoroutine(boostOnYAxis());
 			//Lerp transform position upwards
 			//transform.position += transform.up * Time.deltaTime * 500f;
 
+
+			anim.SetTrigger ("flapTrigger");
+
+
 			//transform.localPosition = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, transform.position.y + jump, transform.position.z), 10);
 			//Debug.Log (transform.position);
-		}
-		else
-		{
+		}else{
 			isFlapping = false;
 		}
 	}

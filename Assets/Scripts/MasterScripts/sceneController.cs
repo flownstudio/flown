@@ -34,7 +34,7 @@ public class sceneController : MonoBehaviour {
 		playerControllerMaster = player.GetComponent<PlayerControllerMaster> ();
 		playerSpeed = playerControllerMaster.speed;
 
-		Renderer renderer = player.transform.Find("rotated_starling_UV").gameObject.GetComponent<Renderer>();
+		Renderer renderer = player.transform.Find("animatedstarling2/Icosphere").gameObject.GetComponent<Renderer>();
 		playerMaterial = renderer.sharedMaterials[0];
 
 		//Disable all cameras and make the first in the list enabled
