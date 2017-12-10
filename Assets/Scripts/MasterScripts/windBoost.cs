@@ -19,8 +19,9 @@ public class windBoost : MonoBehaviour
 
     void OnTriggerStay(){
 
-        playerObject.GetComponent<PlayerControllerMaster>().speed += 3*thrust+Mathf.PerlinNoise(Time.deltaTime, 0.0F);
+        //playerObject.GetComponent<PlayerControllerMaster>().speed += 3*thrust+Mathf.PerlinNoise(Time.deltaTime, 0.0F);
 
+        playerObject.GetComponent<PlayerControllerMaster>().speed += thrust;
     }
 
 }
