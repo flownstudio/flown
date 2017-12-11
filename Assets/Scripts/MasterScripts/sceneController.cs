@@ -10,7 +10,6 @@ public class sceneController : MonoBehaviour {
 
 	public Swipe swipeControls;
 
-
 	public float successRating = 10;
 	public float speed = 12f;
 	public float distanceFromFlock;
@@ -29,7 +28,7 @@ public class sceneController : MonoBehaviour {
 	private Material playerMaterial;
 
 
-	void Start () 
+	void Start ()
 	{
 		playerControllerMaster = player.GetComponent<PlayerControllerMaster> ();
 		playerSpeed = playerControllerMaster.speed;
@@ -50,18 +49,18 @@ public class sceneController : MonoBehaviour {
 		{
 			cameraList [0].gameObject.SetActive(true);
 		}
-			
-
 	}
-	
 
-	void Update () 
+
+	void Update ()
 	{
 		playerStats ();
+
 		//Increase the camera index to get the next camera
-		if (swipeControls.SwipeUp){
+		if (swipeControls.SwipeLeft){
+			Debug.Log("isHolding");
 			SwitchPov ();
-		}	
+		}
 	}
 
 
@@ -86,7 +85,7 @@ public class sceneController : MonoBehaviour {
 			gameManager.activateSceneChallenges (true);
 		}
 
-
+		swipeControls.isHolding = false;
 	}
 
 	void playerStats() {
@@ -95,7 +94,7 @@ public class sceneController : MonoBehaviour {
 		// 1% chance this frame adds a bird up to max birds then goes back down
 
 		if (!autoPilot) {// hack for now so birds don't pop in while wide angle POV is on
-			
+
 			if (UnityEngine.Random.Range (0, 100) < 1) {
 				if (scoreDirectionUp) {
 					successRating += 1;

@@ -14,8 +14,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	private Rigidbody rigidbody;
 	public float speed = 0.0f;
-	private float minSpeed = 5.0f;
-	private float maxSpeed = 95.0f;
+	private float minSpeed = 15.0f;
+	private float maxSpeed = 135.0f;
 	private float acceleration = 10.0f;
 	private float deceleration = 10.0f;
 	private float flapDistance;
@@ -84,7 +84,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 			float bias = 0.96f;
 
-			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + transform.up * 5.0f; // camera offset positions
+			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + Vector3.up * 5.0f; // camera offset positions
 			attachedCamera.transform.position = attachedCamera.transform.position * bias + moveCamTo * (1.0f - bias); // moves the camera, elastically and bias
 			attachedCamera.transform.LookAt (transform.position + transform.forward * 30.0f); // rotating the camera
 
@@ -92,7 +92,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 			float bias = 0.96f;
 
-			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + transform.up * 5.0f;
+			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + Vector3.up * 5.0f;
 			attachedCamera.transform.position = attachedCamera.transform.position * bias + moveCamTo * (1.0f - bias);
 			attachedCamera.transform.LookAt (transform.position + transform.forward * 30.0f);
 			//attachedCamera.transform.Rotate (birdModel.transform.rotation);
@@ -100,7 +100,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 			//attachedCamera.transform.lookRotation (0.0f, 0.0f, Input.GetAxis ("Horizontal"));
 
 			//increase slowdown rate
-			speed -= transform.forward.y;
+			speed -= transform.forward.y * Time.deltaTime * 50f;
 
 			//Cap speed to minimum value
 			if (speed <= minSpeed) {
@@ -148,6 +148,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 			flap();
 		}
 
+
 		//MOBILE MOVEMENT
 
 		if(gyroEnabled){
@@ -161,13 +162,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 		}else{
 			//Move megans stuff in here too
 		}
-
-
-
-
 	}
-
-
 
 	private void flap()
 	{
@@ -176,13 +171,11 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 		if (isFlapping){
 			speed += acceleration;
+			Handheld.Vibrate ();
+			anim.SetTrigger ("flapTrigger");
 			StartCoroutine(boostOnYAxis());
 			//Lerp transform position upwards
 			//transform.position += transform.up * Time.deltaTime * 500f;
-
-
-			anim.SetTrigger ("flapTrigger");
-
 
 			//transform.localPosition = Vector3.Lerp (transform.position, new Vector3 (transform.position.x, transform.position.y + jump, transform.position.z), 10);
 			//Debug.Log (transform.position);
@@ -192,7 +185,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 	}
 
 	IEnumerator boostOnYAxis(){
-		flapDistance = 50.0f;
+		flapDistance = 50.0f; // vertical distance
 		rigidbody.velocity = new Vector3 (0, flapDistance, 0);
 		yield return new WaitForSeconds(0.01f);
 		rigidbody.velocity = new Vector3 (0, -flapDistance / 2, 0);

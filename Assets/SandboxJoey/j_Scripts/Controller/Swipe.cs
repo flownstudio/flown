@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Swipe : MonoBehaviour 
+public class Swipe : MonoBehaviour
 {
 	private bool tap, swipeLeft, swipeRight, swipeUp, swipeDown;
 	private bool isDragging;
+	public bool isHolding;
 
 	private Vector2 startTouch, swipeDelta;
 
@@ -18,53 +19,66 @@ public class Swipe : MonoBehaviour
 
 		if (Input.GetMouseButtonDown (0))
 		{
-			Debug.Log ("Tap..");
-			tap = true;
-			Handheld.Vibrate ();
 			isDragging = true;
+			isHolding = true;
+			tap = false;
+			Debug.Log ("Holding..");
 			startTouch = Input.mousePosition;
 		}
 
 		//On release, reset...
 		else if (Input.GetMouseButtonUp(0))
 		{
+			tap = true;
 			isDragging = false;
+			isHolding = false;
+			Debug.Log ("Tap..");
 			Reset();
 		}
 
 		//MOBILE INPUTS
 
-		if (Input.touches.Length > 0)
+		if (Input.touches.Length > 0) //if there is 1 finger touching or more...
 		{
-			if (Input.touches [0].phase == TouchPhase.Began) {
-				tap = true;
+			if (Input.touches[0].phase == TouchPhase.Began || Input.touches[0].phase == TouchPhase.Stationary)
+			{
+				//key down behaviour
 				isDragging = true;
-				Debug.Log ("Dragging..");
+				isHolding = true;
+				Debug.Log ("Holding..");
+				//Debug.Log ("Dragging..");
 				startTouch = Input.touches[0].position;
-			} 
+			}
+
 
 			//On release, reset...  Have to use ended OR cancelled for touch input
 			else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
 			{
+				//key up behaviour
 				Debug.Log ("Released..");
-				isDragging = false;
+				tap = true;
 				Reset();
 			}
 		}
-
 
 		//Calculate the distance
 		swipeDelta = Vector2.zero;
 
 		if (isDragging)
 		{
+
 			if (Input.touches.Length > 0) {
 				swipeDelta = Input.touches[0].position - startTouch;
-			} 
-			else if (Input.GetMouseButton(0)) 
+				isHolding = true;
+				Debug.Log ("Holding..");
+			}
+			else if (Input.GetMouseButton(0))
 			{
 				swipeDelta = (Vector2)Input.mousePosition - startTouch;
 			}
+			// else if (Input.touches.Length > 0.5 && Input.GetMouseButton(0)){
+      //
+			// }
 		}
 
 		//Did we cross the deadzone?
@@ -77,12 +91,12 @@ public class Swipe : MonoBehaviour
 			if (Mathf.Abs (x) > Mathf.Abs (y))
 			{
 				//Left or right
-				if (x < 0) 
+				if (x < 0)
 				{
 					Debug.Log ("Swipe left..");
 					swipeLeft = true;
-				} 
-				else 
+				}
+				else
 				{
 					Debug.Log ("Swipe right..");
 					swipeRight = true;
@@ -92,15 +106,15 @@ public class Swipe : MonoBehaviour
 			else
 			{
 				//Up or down
-				if (y < 0) 
+				if (y < 0)
 				{
 					Debug.Log ("Swipe down..");
 					swipeDown = true;
-				} 
-				else 
+				}
+				else
 				{
 					Debug.Log ("Swipe up..");
-					swipeUp = true;	
+					swipeUp = true;
 				}
 			}
 
@@ -115,11 +129,14 @@ public class Swipe : MonoBehaviour
 		//reset to zero
 		startTouch = swipeDelta = Vector2.zero;
 		isDragging = false;
+		isHolding = false;
+		// Debug.Log ("not holding...");
 	}
 
 
 	//make variables public and available to other scripts (note capitalisation!)
 	public bool Tap {get {return tap; } }
+	// public bool isHolding {get {return holding; } }
 	public Vector2 SwipeDelta { get {return swipeDelta; } }
 	public bool SwipeLeft {get {return swipeLeft; } }
 	public bool SwipeRight {get {return swipeRight; } }
