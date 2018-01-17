@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b10d0a5440ef74a32b0133cdc7d3e32a
+timeCreated: 1516189165
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: NewMedia
+  fontNames:
+  - NewMedia
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 036e4cd3060ff455f908949e9e70459e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

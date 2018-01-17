@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ba2f3da419ace450fa00f411f54d0ffe
+timeCreated: 1516189308
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Planet Estyle
+  fontNames:
+  - Planet Estyle
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

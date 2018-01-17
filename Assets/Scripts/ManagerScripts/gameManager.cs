@@ -55,9 +55,9 @@ public class gameManager : MonoBehaviour
 					challenges = obj;
 			}
 
-			Cursor.visible = false;
+//			Cursor.visible = false;
 		}else {
-			Cursor.visible = true;
+//			Cursor.visible = true;
 		}
 
 	}
@@ -101,7 +101,7 @@ public class gameManager : MonoBehaviour
 		if (level != 0) {
 			if (level == 1) {
 				GameObject.Find ("mapGenerator").GetComponent<endlessTerrain> ().initTerrain ();
-				Cursor.visible = false;
+//				Cursor.visible = false;
 			}
 
 			GameObject[] rootObjects = SceneManager.GetSceneByBuildIndex (level).GetRootGameObjects();
@@ -111,10 +111,10 @@ public class gameManager : MonoBehaviour
 					challenges = obj;
 			}
 
-			Cursor.visible = false;
+//			Cursor.visible = false;
 			SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 		}else{
-			Cursor.visible = true;
+//			Cursor.visible = true;
 			SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 		}
 

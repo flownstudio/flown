@@ -95,6 +95,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 			Vector3 moveCamTo = transform.position - transform.forward * 7.0f + Vector3.up * 5.0f;
 			attachedCamera.transform.position = attachedCamera.transform.position * bias + moveCamTo * (1.0f - bias);
 			attachedCamera.transform.LookAt (transform.position + transform.forward * 30.0f);
+
 			//attachedCamera.transform.Rotate (birdModel.transform.rotation);
 
 			//attachedCamera.transform.lookRotation (0.0f, 0.0f, Input.GetAxis ("Horizontal"));
@@ -115,7 +116,7 @@ public class PlayerControllerMaster : MonoBehaviour {
 			//COMMON FILTER - GRPAHING GYRO DATA
 
 			transform.position += transform.forward * speed * Time.deltaTime;
-			transform.Rotate (Input.GetAxis("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));//HOW TO TRANSLATE DIRECTION TO MOBILE?? TIN!!!!
+			transform.Rotate (Input.GetAxis("Vertical"), 0.0f, Input.GetAxis ("Horizontal"));
 			//birdModel.transform.position = transform.position + spaceBuffer;
 
 
@@ -261,8 +262,8 @@ public class PlayerControllerMaster : MonoBehaviour {
 
 	void OnGUI() {
 		//		string gui = "X: " + eulerX + ", Y: " + eulerY +", Z: " + eulerZ;
-		string gui = "Speed: " + speed;
-		GUI.Label(new Rect(10, 10, 500, 20), gui );
+//		string gui = "Speed: " + speed;
+//		GUI.Label(new Rect(10, 10, 500, 20), gui );
 	}
 
 
